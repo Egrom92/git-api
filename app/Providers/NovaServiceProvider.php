@@ -32,7 +32,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             TimeField::make('Регистрация время', 'reg_time'),
             Text::make('Вечеринка место', 'party_place'),
             Text::make('Ссылка Google map Вечеринка место', 'google_party_place'),
-            TimeField::make('Вечеринка время', 'party_time'),
+            TimeField::make('Первый День вечеринка время', 'first_time'),
+            TimeField::make('Второй день вечеринка время', 'second_time'),
+
         ], [], 'Home page');
 
         NovaSettings::addSettingsFields([

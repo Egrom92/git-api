@@ -2,14 +2,17 @@
 
 namespace App\Nova;
 
+use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Epartment\NovaDependencyContainer\HasDependencies;
 
 class Guest extends Resource
 {
+    use HasDependencies;
     /**
      * The model the resource corresponds to.
      *
@@ -51,6 +54,13 @@ class Guest extends Resource
                 'register' => 'Регистрация',
                 'party' => 'Вечиринка',
             ])->default('register'),
+            NovaDependencyContainer::make([
+                Select::make('День', 'day')->options([
+                    'first_day' => 'Первый день',
+                    'second_day' => 'Второй день',
+                    'all_days' => 'Оба дня',
+                ])->default('first_day'),
+            ])->dependsOn('category', 'party'),
             Select::make('Кто', 'who')->options([
                 'male' => 'Мужчина',
                 'female' => 'Девушка',
