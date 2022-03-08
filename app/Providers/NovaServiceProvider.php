@@ -10,6 +10,7 @@ use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Nova;
 use Laravel\Nova\NovaApplicationServiceProvider;
+use Laravel\Nova\Panel;
 use OptimistDigital\NovaSettings\NovaSettings;
 use Johnathan\NovaTrumbowyg\NovaTrumbowyg;
 use Whitecube\NovaFlexibleContent\Flexible;
@@ -26,14 +27,26 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
         parent::boot();
 
         NovaSettings::addSettingsFields([
-            Text::make('Подзаголовок', 'description'),
-            Text::make('Регистрация место', 'reg_place'),
-            Text::make('Ссылка Google map Регистрация место', 'google_reg_place'),
-            TimeField::make('Регистрация время', 'reg_time'),
-            Text::make('Вечеринка место', 'party_place'),
-            Text::make('Ссылка Google map Вечеринка место', 'google_party_place'),
-            TimeField::make('Первый День вечеринка время', 'first_time'),
-            TimeField::make('Второй день вечеринка время', 'second_time'),
+            Panel::make('Шапка', [
+                Text::make('Подзаголовок', 'description'),
+            ]),
+            Panel::make('Зум', [
+                Text::make('Заголовок', 'zoom_title'),
+                Text::make('Ссылка', 'zoom_link'),
+                Text::make('Заголовок для поздравлений', 'zoom_title_congratulations'),
+                Text::make('Ссылка для поздравлений', 'zoom_link_congratulations'),
+            ]),
+            Panel::make('Регистрация', [
+                Text::make('Место', 'reg_place'),
+                Text::make('Ссылка Google map', 'google_reg_place'),
+                TimeField::make('Время', 'reg_time'),
+            ]),
+            Panel::make('Туса', [
+                Text::make('Место', 'party_place'),
+                Text::make('Ссылка Google map', 'google_party_place'),
+                TimeField::make('Первый День', 'first_time'),
+                TimeField::make('Второй день', 'second_time'),
+            ]),
 
         ], [], 'Home page');
 
@@ -67,9 +80,9 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function routes()
     {
         Nova::routes()
-                ->withAuthenticationRoutes()
-                ->withPasswordResetRoutes()
-                ->register();
+            ->withAuthenticationRoutes()
+            ->withPasswordResetRoutes()
+            ->register();
     }
 
     /**

@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Epartment\NovaDependencyContainer\NovaDependencyContainer;
 use Illuminate\Http\Request;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
@@ -54,6 +55,10 @@ class Guest extends Resource
                 'register' => 'Регистрация',
                 'party' => 'Вечиринка',
             ])->default('register'),
+            Boolean::make('Поздравления', 'congratulations')
+                ->trueValue(true)
+                ->falseValue(false)
+                ->hideFromIndex(),
             NovaDependencyContainer::make([
                 Select::make('День', 'day')->options([
                     'first_day' => 'Первый день',

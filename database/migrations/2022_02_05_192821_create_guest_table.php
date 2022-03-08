@@ -18,6 +18,7 @@ class CreateGuestTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('category');
+            $table->boolean('congratulations');
             $table->string('day');
             $table->string('who');
             $table->timestamps();
